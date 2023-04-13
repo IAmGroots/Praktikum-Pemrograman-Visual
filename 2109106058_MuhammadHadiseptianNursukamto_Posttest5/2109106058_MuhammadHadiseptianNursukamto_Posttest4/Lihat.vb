@@ -3,6 +3,10 @@
 Public Class Lihat
     Private Sub Create_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         koneksi()
+        Main.txtCari.Visible = True
+        Main.btnCari.Visible = True
+        Main.btnTambah.Visible = True
+        Main.btnRefresh.Visible = True
 
         DA = New MySqlDataAdapter("Select * From produk", CONN)
         DS = New DataSet
@@ -20,11 +24,11 @@ Public Class Lihat
             Next
             Dim produk As New Produk
             With produk
-                .btnKodeProduk.Text = array(i, 0)
-                .btnNamaProduk.Text = array(i, 1)
+                .KodeProduk.Text = array(i, 0)
+                .NamaProduk.Text = array(i, 1)
                 Dim hrg As Integer = array(i, 3)
-                .btnHargaProduk.Text = "Rp " & FormatNumber(hrg, 0, TriState.True)
-                .PictureBox1.Image = Image.FromFile(PATH_GAMBAR & array(i, 4))
+                .HargaProduk.Text = "Rp " & FormatNumber(hrg, 0, TriState.True)
+                .pctProduk.ImageLocation = PATH_GAMBAR & array(i, 4)
             End With
             produk.TopLevel = False
             FlowLayoutPanel1.Controls.Add(produk)
